@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="canhetingsky">
+  <meta name="keywords" content="">
+  <title>蓝桥杯单片机设计与开发 - canhetingsky | Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_9n5xqdrq0nc.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>canhetingsky | Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-04-14 19:51">
+                    2020-04-14 19:51
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    990 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    14
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-warning">
+                本文最后更新于：2020-05-05 08:40
+              </p>
+            
+            <article class="markdown-body">
+              <h3 id="蓝桥杯单片机设计与开发实验例程"><a href="#蓝桥杯单片机设计与开发实验例程" class="headerlink" title="蓝桥杯单片机设计与开发实验例程"></a>蓝桥杯单片机设计与开发实验例程</h3><table>
+<thead>
+<tr>
+<th>常用模块</th>
+<th>LED</th>
+<th>按键</th>
+<th>数码管</th>
+<th>DS18B20</th>
+<th>定时器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>备注</td>
+<td>亮状态控制</td>
+<td>独立按键/矩阵按键</td>
+<td>动态显示数据</td>
+<td>根据提供的驱动，编写初始化及读取温度函数即可</td>
+<td>辅助，但必会</td>
+</tr>
+</tbody></table>
+<a id="more"></a>
+
+<blockquote>
+<p>1.LED闪烁实验</p>
+</blockquote>
+<ul>
+<li>实验效果：LED以0.2S为间隔闪烁</li>
+</ul>
+<pre><code class="c">#include &quot;reg52.h&quot; 
+
+void delay(void)    //延时函数
+{
+    unsigned char i,j,k;
+    for(i=0; i&lt;20; i++)
+    {
+        for(j=0; j&lt;20; j++)
+        {
+            for(k=0; k&lt;248; k++);
+        }
+    } 
+}
+
+void main(void)
+{
+    while(1)
+    {
+        P2 = ((P2&amp;0x1f)|0x80);
+        P0 = 0xff;  //LED熄灭
+        P2 &amp;= 0x1f;
+        delay();
+
+        P2 = ((P2&amp;0x1f)|0x80);
+        P0 = 0x00;  //LED点亮
+        P2 &amp;= 0x1f;
+        delay();
+    }
+}</code></pre>
+<blockquote>
+<p>2.按键控制（独立按键）</p>
+</blockquote>
+<ul>
+<li>实验效果：按下不同的按键，LED有不同的现象</li>
+</ul>
+<pre><code class="c">#include &quot;reg52.h&quot;  //定义51单片机特殊功能寄存器
+
+/** 独立按键接口 */
+sbit S7  = P3^0;
+sbit S6  = P3^1;
+sbit S5  = P3^2;
+sbit S4  = P3^3;
+
+//主函数
+void main(void)
+{    
+  while(1)
+  {
+      if(S7 == 0)
+      {
+          P2 = ((P2&amp;0x1f)|0x80);
+          P0 = 0xff;  //关闭所有LED
+          P2 &amp;= 0x1f;
+      }
+
+      if(S6 == 0)
+      {
+          P2 = ((P2&amp;0x1f)|0x80);
+          P0 = 0x00;  //打开所有LED
+          P2 &amp;= 0x1f;
+      }
+
+      if(S5 == 0)
+      {
+          P2 = ((P2&amp;0x1f)|0xa0);
+          P0 &amp;= ~(0x01&lt;&lt;4);  //Close
+          P2 &amp;= 0x1f;
+      }
+
+      if(S4 == 0)
+      {
+          P2 = ((P2&amp;0x1f)|0xa0);
+          P0 |= (0x01&lt;&lt;4); //Open
+          P2 &amp;= 0x1f;
+      }
+  }
+}</code></pre>
+<blockquote>
+<p>3.数码管控装置</p>
+</blockquote>
+<p>实验效果：所有的数码管显示的相同的数据</p>
+<pre><code class="c">#include &quot;reg52.h&quot;  //定义51单片机特殊功能寄存器
+
+code unsigned char tab[] ={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+
+void delay(void)    //延时函数
+{
+    unsigned char i,j,k;
+    for(i=0; i&lt;20; i++)
+    {
+        for(j=0; j&lt;20; j++)
+        {
+            for(k=0; k&lt;248; k++);
+        }
+    } 
+}
+
+void main(void)
+{ 
+    unsigned char i;
+    while(1)
+    {
+        for(i=0;i&lt;10;i++)
+        {
+            //段码：确定是哪一位数码管亮
+              P2=(P2&amp;0x1f|0xc0);
+            P0=0xff;
+            P2=0x1f;
+
+              //位码：确定数码管显示的内容
+            P2=(P2&amp;0x1f|0xe0);
+            P0=tab[i];
+            P2=0x1f;
+            delay();
+        }
+    }
+}</code></pre>
+<blockquote>
+<p>4.定时器的使用</p>
+</blockquote>
+<p>配置定时器0，工作方式是1，并开启中断；</p>
+<ul>
+<li>定时器模式配置</li>
+</ul>
+<pre><code class="c">TMOD |= 0x01;  //配置定时器工作模式
+TH0 = (65536-2000)/256;
+TL0 = (65536-2000)%256; //定时器初始值  
+EA = 1; //开启总中断，只有开启了总中断，其他中断才有效
+ET0 = 1;  //打开定时器0中断
+TR0 = 1;  //启动定时器0，即定时器0开始计数</code></pre>
+<ul>
+<li>中断服务函数</li>
+</ul>
+<pre><code class="c">void isr_timer_0(void)  interrupt 1  //默认中断优先级 1
+{
+    TH0 = (65536-2000)/256;
+    TL0 = (65536-2000)%256;  //定时器重载 
+
+    //put your code here
+}</code></pre>
+<ul>
+<li>例程之基于定时器的数码管时钟</li>
+</ul>
+<pre><code class="c">#include &lt;reg51.h&gt;
+
+/***************数码管段码    0    1    2    3    4    5    6    7    8    9   灭   - */
+unsigned char code tab[] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0xff,0xbf};
+
+unsigned char dspbuf[8]= {10,10,10,10,10,10,10,10};    //数码管显示缓冲区
+unsigned char dspcom=0;    //数码管动态刷新时位置
+
+unsigned char flag_2ms=0;    //数码管刷新标志位
+
+unsigned int second=30,minute=15,hour=17;        //初始化时间
+
+void display();
+
+//主函数
+void main()
+{
+    //定时器0初始化
+    TMOD |= 0x01;
+    TH0 = (65536-2000)/256;
+    TL0 = (65536-2000)/256;
+    EA=1;    //开启总中断
+    ET0=1;    //开启定时器0中断
+    TR0=1;    //启动定时器0
+
+    while(1)
+    {
+        if(flag_2ms == 1)
+        {
+            display();
+            flag_2ms=0;
+        }
+
+        //更新显示数据
+        dspbuf[0] = hour/10;
+        dspbuf[1] = hour%10;
+
+        dspbuf[2] = 11;
+
+        dspbuf[3] = minute/10;
+        dspbuf[4] = minute%10;
+
+        dspbuf[5] = 11;
+
+        dspbuf[6] = second/10;
+        dspbuf[7] = second%10;
+    }
+}
+
+//定时器0中断服务函数
+void timer0_int() interrupt 1
+{
+    //刚开始数码管时间无法更新，保持初始值；
+    //原因：char最大是255，根本不会达到500，当然不会更新时间了，嘤嘤嘤！
+//    static unsigned char counter=0;    
+    static unsigned int counter=0;
+
+    //定时器重载
+    TH0=(65536-2000)/256;
+    TL0=(65536-2000)/256;
+
+    //2ms执行一次
+    counter++;
+    flag_2ms=1;
+    if(counter==500)    //ls时间
+    {
+        counter=0;
+        second++;
+        if(second==60)
+        {
+            second=0;
+            minute++;
+            if(minute==60)
+            {
+                minute=0;
+                hour++;
+                if(hour==24)
+                {
+                    hour=0;
+                }
+            }            
+        }
+
+    }    
+}
+
+//数码管动态显示函数
+void display()
+{
+    //用于消除数码管闪烁
+    P2=(P2&amp;0x1f|0xe0);
+    P0=tab[10];
+    P2=0x1f;
+
+    //数码管位码
+    P2 = (P2 &amp; 0x1f) | 0xc0;
+    P0 = (0x01&lt;&lt;dspcom);
+    P2 = P2 &amp; 0x1f;
+
+    //数码管段码
+    P2 = (P2 &amp; 0x1f) | 0xe0;
+    P0 = tab[dspbuf[dspcom]];
+    P2 = P2 &amp; 0x1f;
+
+    dspcom++;
+    if(dspcom == 8)
+    {
+        dspcom=0;
+    }
+}</code></pre>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AD%A6%E4%B9%A0-%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%8D%95%E7%89%87%E6%9C%BA/">学习 蓝桥杯单片机</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/14/keil-Astyle/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">在 keil 中使用 Astyle 格式化代码</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/14/C-color-draw/">
+                        <span class="hidden-mobile">C++-color-draw</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js" ></script>
+
+  <script type="text/javascript">
+    var notify = 'false' === 'true';
+    var verify = 'false' === 'true';
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "uVBq0Ik9UspFowIIeCNHnhyT-gzGzoHsz",
+        app_key: "TJfpdoNHF4UGMcr4UvUqV8RV",
+        placeholder: "Write a comment",
+        avatar: "/retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+      });
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+      <!-- cnzz Analytics Icon -->
+      <span id="cnzz_stat_icon_1271264048" style="display: none"></span>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b1efa8f1cc8143d0e2e2343f830da633";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- cnzz Analytics -->
+    <script defer src="//s4.cnzz.com/z_stat.php?id=1271264048&show=pic"
+            type="text/javascript"></script>
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').each(function () {
+        const pre = $(this);
+        if (pre.find('code.mermaid').length > 0) {
+          return;
+        }
+        pre.addClass('prettyprint  linenums');
+      });
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "蓝桥杯单片机设计与开发&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
